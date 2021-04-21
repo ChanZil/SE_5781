@@ -2,6 +2,8 @@ package primitives;
 
 import java.util.Objects;
 
+import static primitives.Util.isZero;
+
 /**
  * Ray class is the basic class representing a Ray. Based on a point and a vector.
  *
@@ -28,6 +30,19 @@ public class Ray {
 
     public Vector getDir() {
         return dir;
+    }
+
+    /**
+     * Get delta and multiply the ray in it and return it.
+     *
+     * @param delta the number to multiply
+     * @return the new ray
+     */
+    public Point3D getPoint(double delta){
+        if (isZero(delta)){
+            return pO;
+        }
+        return pO.add(dir.scale(delta));
     }
 
     @Override

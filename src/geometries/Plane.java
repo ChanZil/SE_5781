@@ -1,7 +1,11 @@
 package geometries;
 
-import primitives.Point3D;
-import primitives.Vector;
+import primitives.*;
+
+import java.util.List;
+
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 
 /**
  * Plane class represent the shape plane
@@ -56,4 +60,31 @@ public class Plane implements Geometry{
         return normal;
     }
 
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        Point3D P0 = ray.getpO();
+        Vector v = ray.getDir();
+        Vector n = normal;
+        //if the ray starts from the point of the plane, there are no intersections.
+        if(q0.equals(P0)){
+            return  null;
+        }
+        Vector P0_Q0 = q0.subtract(P0);
+        double nP0Q0  = alignZero(n.dotProduct(P0_Q0)); //numerator
+        //if the numerator is zero, there are no intersections.
+        if (isZero(nP0Q0)){
+            return null;
+        }
+        double nv = alignZero(n.dotProduct(v)); //denominator
+        //if the ray is lying in the plane axis- there are no intersections.
+        if(isZero(nv)){
+            return null;
+        }
+        double  t = alignZero(nP0Q0 / nv);
+        if (t <= 0){
+            return  null;
+        }
+        Point3D point = ray.getPoint(t); //find the intersection with the plane
+        return List.of(point);
+    }
 }

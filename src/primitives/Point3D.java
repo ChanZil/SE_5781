@@ -56,6 +56,16 @@ public class Point3D {
         return "(" + x + "," + y + "," + z + ")";
     }
 
+    public double getX() {
+        return x.coord;
+    }
+
+    public double getY() {
+        return y.coord;
+    }
+
+    public double getZ() { return z.coord; }
+
     /**
      * A subtraction from the current point to a point it gets
      *

@@ -4,12 +4,16 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
+import static primitives.Util.*;
+
 /**
  * Tube class represent the shape Tube
  *
  * @author Chani & Sara Lea
  */
-public class Tube implements Geometry{
+public class Tube implements Geometry {
     Ray axisRay;
     double radius;
 
@@ -17,7 +21,7 @@ public class Tube implements Geometry{
      * gets a ray and the radius of the tube and creates a Tube
      *
      * @param axisRay
-     * @param radius the radius of the tube
+     * @param radius  the radius of the tube
      */
     public Tube(Ray axisRay, double radius) {
         this.axisRay = axisRay;
@@ -40,9 +44,25 @@ public class Tube implements Geometry{
                 '}';
     }
 
+    /**
+     * normalize Tube
+     */
     @Override
     public Vector getNormal(Point3D point) {
-        Vector v = point.subtract(axisRay.getpO());
-        return v.normalize();
+        Point3D P0 = axisRay.getpO();
+        Vector v = axisRay.getDir();
+        Vector P0_P = point.subtract(P0);
+        double t = alignZero(v.dotProduct(P0_P));
+        if (isZero(t)) {
+            return P0_P.normalize();
+        }
+        Point3D O = P0.add(v.scale(t));
+        Vector n = point.subtract(O);
+        return n.normalize();
+    }
+
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }
+
