@@ -60,7 +60,5 @@ class PlaneTest {
         // TC17: Ray from plane's Q point
         assertNull(plane.findIntersections(new Ray(new Point3D(0, 0, 1), new Vector(1, 1, 0))),
                 "Not intersection with the plane");
-
-
     }
 }

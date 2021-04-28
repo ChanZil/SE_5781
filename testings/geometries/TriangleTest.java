@@ -63,14 +63,4 @@ class TriangleTest {
                 "Wrong intersection with plane");
         assertNull(tr.findIntersections(ray), "Bad intersection");
     }
-
-    @Test
-    void s(){
-        Triangle tr = new Triangle(new Point3D(0, 0, 1), new Point3D(1, 0, 0), new Point3D(0, 1, 0));
-        Plane pl = new Plane(new Point3D(0, 0, 1), new Point3D(1, 0, 0), new Point3D(0, 1, 0));
-        Ray ray = new Ray(new Point3D(0, 0, -1), new Vector(1, 1, 0));
-        assertEquals(List.of(new Point3D(1, 1, -1)), pl.findIntersections(ray),
-                "Wrong intersection with plane");
-        assertNull(tr.findIntersections(ray), "Bad intersection");
-    }
 }
