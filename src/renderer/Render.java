@@ -41,7 +41,7 @@ public class Render {
      * @param rayTracerBase the new tracer base
      * @return the render
      */
-    public Render setRayTracerBase(RayTracerBase rayTracerBase) {
+    public Render setRayTracer(RayTracerBase rayTracerBase) {
         this.rayTracerBase = rayTracerBase;
         return this;
     }
@@ -97,4 +97,6 @@ public class Render {
             throw new MissingResourceException("No image writer", ImageWriter.class.getName(), "");
         imageWriter.writeToImage();
     }
+
+
 }

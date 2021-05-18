@@ -16,13 +16,13 @@ class SphereTest {
 
     @Test
     void getNormal() {
-        Sphere sp = new Sphere(new Point3D(0,0,0), 5);
+        Sphere sp = new Sphere(5, new Point3D(0,0,0));
         assertEquals(new Vector(1,0,0),sp.getNormal(new Point3D(5,0,0)));
     }
 
     @Test
     public void testFindIntersectionsRay() {
-        Sphere sphere = new Sphere( new Point3D(1, 0, 0), 1d);
+        Sphere sphere = new Sphere(1d, new Point3D(1, 0, 0));
 
         // ============ Equivalence Partitions Tests ==============
         Point3D gp1 = new Point3D(0.0651530771650466, 0.355051025721682, 0);

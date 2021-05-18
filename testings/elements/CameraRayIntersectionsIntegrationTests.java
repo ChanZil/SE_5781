@@ -7,8 +7,6 @@ import primitives.*;
 import geometries.Intersectable;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -57,19 +55,19 @@ public class CameraRayIntersectionsIntegrationTests {
     @Test
     public void sphereTest(){
         //TC01: 2 intersections
-        Sphere sp1 = new Sphere(new Point3D(0, 0, -3), 1);
+        Sphere sp1 = new Sphere(1, new Point3D(0, 0, -3));
         assertEquals(2, amountOfIntersections(cam1, sp1));
         //TC02: 18 intersections
-        Sphere sp2 = new Sphere(new Point3D(0, 0, -2.5), 2.5);
+        Sphere sp2 = new Sphere(2.5, new Point3D(0, 0, -2.5));
         assertEquals(18, amountOfIntersections(cam2, sp2));
         //TC03: 10 intersections
-        Sphere sp3 = new Sphere(new Point3D(0, 0, -2), 2);
+        Sphere sp3 = new Sphere(2, new Point3D(0, 0, -2));
         assertEquals(10, amountOfIntersections(cam2, sp3));
         //TC04: 9 intersections
-        Sphere sp4 = new Sphere(new Point3D(0, 0, -1), 4);
+        Sphere sp4 = new Sphere(4, new Point3D(0, 0, -1));
         assertEquals(9, amountOfIntersections(cam1, sp4));
         //TC05: no intersections at all
-        Sphere sp5 = new Sphere(new Point3D(0, 0, 1), 0.5);
+        Sphere sp5 = new Sphere(0.5, new Point3D(0, 0, 1));
         assertEquals(0, amountOfIntersections(cam1, sp5));
     }
 

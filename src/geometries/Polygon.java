@@ -10,7 +10,7 @@ import static primitives.Util.*;
  *
  * @author Dan
  */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
     /**
      * List of polygon's vertices
      */
@@ -87,17 +87,45 @@ public class Polygon implements Geometry {
     }
 
     @Override
-    public String toString() {
-        String result = "Vertices = <";
-        for(Point3D vertex : vertices){
-            result+= vertex;
-        }
-        result += '>';
-        return result;
-    }
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        List<GeoPoint> result = plane.findGeoIntersections(ray);
 
-    @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        return null;
+        if (result == null) {
+            return null;
+        }
+
+        Point3D P0 = ray.getpO();
+        Vector v = ray.getDir();
+
+        Point3D P1 = vertices.get(1);
+        Point3D P2 = vertices.get(0);
+
+        Vector v1 = P1.subtract(P0);
+        Vector v2 = P2.subtract(P0);
+
+        double sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
+
+        if (isZero(sign)) {
+            return null;
+        }
+
+        boolean positive = sign > 0;
+
+        //iterate through all vertices of the polygon
+        for (int i = vertices.size() - 1; i > 0; --i) {
+            v1 = v2;
+            v2 = vertices.get(i).subtract(P0);
+
+            sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
+            if (isZero(sign)) {
+                return null;
+            }
+
+            if (positive != (sign > 0)) {
+                return null;
+            }
+        }
+        List<GeoPoint>  geoPoints = List.of(new GeoPoint(this, result.get(0).point));
+        return geoPoints;
     }
 }

@@ -4,7 +4,6 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +19,7 @@ public class GeometriesTests {
     @Test
     void findIntersections() {
         Plane plane = new Plane(new Point3D(0, 0, 1), new Vector(1, 1, 1));
-        Sphere sphere = new Sphere(new Point3D(1, 0, 0), 1d);
+        Sphere sphere = new Sphere(1d, new Point3D(1, 0, 0));
         Triangle tr = new Triangle(new Point3D(0, 0, 1), new Point3D(1, 0, 0), new Point3D(0, 1, 0));
         Geometries intersetables = new Geometries(plane, sphere, tr);
         Ray ray = new Ray(new Point3D(0.5, 0, 0), new Vector(1, 0, 0));
@@ -29,7 +28,7 @@ public class GeometriesTests {
         // TC01: the ray has some intersections with the geometries but not with all of them
         Plane plane1 = new Plane(new Point3D(0, 0, 1), new Vector(1, 1, 1));
         Triangle tr1 = new Triangle(new Point3D(0, 0, 1), new Point3D(1, 0, 0), new Point3D(0, 1, 0));
-        Sphere sp1 = new Sphere(new Point3D(0.5,0.5,0.5), 1);
+        Sphere sp1 = new Sphere(1, new Point3D(0.5,0.5,0.5));
         Geometries intersetables0 = new Geometries(tr1);
         Ray ray0 = new Ray(new Point3D(1, 1, 1), new Vector(-1, -1, -1));
         assertEquals(List.of(new Point3D(1d / 3, 1d / 3, 1d / 3), new Point3D(2d / 3, 2d / 3, 2d / 3)), intersetables0.findIntersections(ray0), "Bad intersections");
@@ -51,7 +50,7 @@ public class GeometriesTests {
 
         Plane plane2 = new Plane(new Point3D(0, 0, 1), new Vector(1, 1, 1));
         Triangle tr2 = new Triangle(new Point3D(0, 0, 1), new Point3D(1, 0, 0), new Point3D(0, 1, 0));
-        Sphere sp2 = new Sphere(new Point3D(1,1,1), 1);
+        Sphere sp2 = new Sphere(1, new Point3D(1,1,1));
         Geometries intersetables2 = new Geometries(plane2, tr2, sp2);
         assertEquals(List.of(new Point3D(1d / 3, 1d / 3, 1d / 3), new Point3D(2d / 3, 2d / 3, 2d / 3), new Point3D(0.42264973081037416,0.42264973081037416,0.42264973081037416)), intersetables0.findIntersections(ray0), "Bad intersections");
     }
