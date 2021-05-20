@@ -14,8 +14,8 @@ import static primitives.Util.alignZero;
  * @author Chani & Sara Lea
  */
 public class Sphere extends Geometry{
-    Point3D center;
-    double radius;
+    Point3D center; //the center point of the sphere
+    double radius; //the radius of the sphere
 
     /**
      * constructor- gets a point and radius and create a Sphere
@@ -27,10 +27,16 @@ public class Sphere extends Geometry{
         this.radius = radius;
     }
 
+    /**
+     * @return the point center of the sphere
+     */
     public Point3D getCenter() {
         return center;
     }
 
+    /**
+     * @return the radius of the sphere
+     */
     public double getRadius() {
         return radius;
     }
@@ -43,13 +49,22 @@ public class Sphere extends Geometry{
                 '}';
     }
 
+    /**
+     * calculate the vector normal of the sphere
+     * @param point the location of the sphere
+     * @return the vector normal of the sphere
+     */
     @Override
     public Vector getNormal(Point3D point) {
         Vector v = point.subtract(center);
         return v.normalize();
     }
 
-
+    /**
+     * find the intersections points with the ray and the sphere
+     * @param ray check the intersections between it and the Geometry shape
+     * @return a list with geoPoints- the intersections points and the object (sphere)
+     */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray) {
         Point3D P0 = ray.getpO();

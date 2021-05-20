@@ -12,13 +12,16 @@ import java.util.stream.Collectors;
  * @author Chani & Sara Lea
  */
 public interface Intersectable {
+    /**
+     * GeoPoint class represent the intersection point with an object
+     */
     public static class GeoPoint{
-        public Geometry geometry;
-        public Point3D point;
+        public Geometry geometry; //the shape that the ray intersected with
+        public Point3D point; //the intersection point with the ray and the object
 
         /**
-         *
-         * @param geometry
+         * basic constructor of GeoPoint
+         * @param geometry the geometry shape
          * @param point
          */
         public GeoPoint(Geometry geometry, Point3D point) {
@@ -27,9 +30,9 @@ public interface Intersectable {
         }
 
         /**
-         *
-         * @param o
-         * @return
+         * check if 2 geoPoints are equal
+         * @param o the other geoPoint to check
+         * @return true if equal, false if not.
          */
         @Override
         public boolean equals(Object o) {
@@ -41,6 +44,7 @@ public interface Intersectable {
 
     }
     /**
+     * calculates all the intersections points of the ray given with the object
     * @param ray- check the intersections between it and the Geometry shape.
      * @return a list of all the intersections points.
     */
@@ -52,5 +56,10 @@ public interface Intersectable {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * calculates all the intersections points of the ray given with the object
+     * @param ray check the intersections between it and the Geometry shape
+     * @return GeoPoint- a list of the geoPoints- including the intersections point and the object it intersected with.
+     */
     public List<GeoPoint> findGeoIntersections(Ray ray);
 }

@@ -81,11 +81,21 @@ public class Polygon extends Geometry {
         }
     }
 
+    /**
+     * calculate the vector normal of the polygon
+     * @param point the location of the polygon
+     * @return the vector normal of the polygon
+     */
     @Override
     public Vector getNormal(Point3D point) {
         return plane.getNormal(null);
     }
 
+    /**
+     * find the intersections points with the ray and the polygon
+     * @param ray check the intersections between it and the Geometry shape
+     * @return a list with geoPoints- the intersections points and the object (polygon)
+     */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray) {
         List<GeoPoint> result = plane.findGeoIntersections(ray);

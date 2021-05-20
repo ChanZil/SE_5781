@@ -14,8 +14,8 @@ import static primitives.Util.isZero;
  * @author Chani & Sara Lea
  */
 public class Ray {
-    Point3D pO;
-    Vector dir;
+    Point3D pO; //the point that the ray start
+    Vector dir; //the direction of the ray
 
     /**
      * constructor- gets a Point3D and a Vector and creates a Ray
@@ -28,10 +28,16 @@ public class Ray {
         this.dir = dir.normalized();
     }
 
+    /**
+     * @return the start point of the ray
+     */
     public Point3D getpO() {
         return pO;
     }
 
+    /**
+     * @return the direction of the ray
+     */
     public Vector getDir() {
         return dir;
     }
@@ -71,7 +77,7 @@ public class Ray {
     }
 
     /**
-     * get a list of points anf find the point with the closest distance with the ray
+     * get a list of points and find the point with the closest distance with the ray
      * @param pointsList the list of the points
      * @return the closest point
      */
@@ -91,6 +97,11 @@ public class Ray {
         return closestPoint;
     }
 
+    /**
+     * get a list of GeoPoints and find the GeoPoint with the closest distance with the ray
+     * @param intersections the list of GeoPoints
+     * @return the closest GeoPoint to the ray
+     */
     public GeoPoint findClosestGeoPoint(List<GeoPoint> intersections) {
         GeoPoint closestPoint = null;
         double closestDistance = Double.MAX_VALUE;

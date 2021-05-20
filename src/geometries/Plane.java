@@ -13,15 +13,15 @@ import static primitives.Util.isZero;
  * @author Chani & Sara Lea
  */
 public class Plane extends Geometry{
-    Point3D q0;
-    Vector normal;
+    Point3D q0; //a point on the plane
+    Vector normal; //a vector normal to the plane
 
     /**
      * constructor- gets 3 points and creates a plane
      *
-     * @param p1
-     * @param p2
-     * @param p3
+     * @param p1 first point
+     * @param p2 second point
+     * @param p3 third point
      */
     public Plane(Point3D p1, Point3D p2, Point3D p3) {
         q0 = p1;
@@ -35,14 +35,17 @@ public class Plane extends Geometry{
     /**
      * constructor- gets a point and a vector and creates a plane
      *
-     * @param p0
-     * @param normal
+     * @param p0 a point on the plane
+     * @param normal the vector normal to the plane
      */
     public Plane(Point3D p0, Vector normal) {
         q0 = p0;
         this.normal = normal.normalized();
     }
 
+    /**
+     * @return q0
+     */
     public Point3D getQ0() {
         return q0;
     }
@@ -55,11 +58,21 @@ public class Plane extends Geometry{
                 '}';
     }
 
+    /**
+     * calculate the vector normal of the plane
+     * @param point the location of the plane
+     * @return the vector normal of the plane
+     */
     @Override
     public Vector getNormal(Point3D point) {
         return normal;
     }
 
+    /**
+     * find the intersections point with the ray and the plane
+     * @param ray check the intersections between it and the Geometry shape
+     * @return a list with geoPoints- the intersections point and the object (plane)
+     */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray) {
         Point3D P0 = ray.getpO();
