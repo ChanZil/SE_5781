@@ -69,12 +69,13 @@ public class Plane extends Geometry{
     }
 
     /**
-     * find the intersections point with the ray and the plane
+     * find the intersections point with the ray and the plane in a certain distance
      * @param ray check the intersections between it and the Geometry shape
+     * @param maxDistance the maximum distance between the light source and the plane
      * @return a list with geoPoints- the intersections point and the object (plane)
      */
     @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         Point3D P0 = ray.getpO();
         Vector v = ray.getDir();
         Vector n = normal;
@@ -94,10 +95,12 @@ public class Plane extends Geometry{
             return null;
         }
         double  t = alignZero(nP0Q0 / nv);
-        if (t <= 0){
+        //if the intersection point is in the certain distance
+        if (t <= 0 || alignZero(t - maxDistance) > 0){
             return  null;
         }
         Point3D point = ray.getPoint(t); //find the intersection with the plane
         return List.of(new GeoPoint(this, point));
     }
+
 }

@@ -92,13 +92,14 @@ public class Polygon extends Geometry {
     }
 
     /**
-     * find the intersections points with the ray and the polygon
+     * find the intersections points with the ray and the polygon in a certain distance
      * @param ray check the intersections between it and the Geometry shape
+     * @param maxDistance the maximum distance between the light source and the polygon
      * @return a list with geoPoints- the intersections points and the object (polygon)
      */
     @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
-        List<GeoPoint> result = plane.findGeoIntersections(ray);
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        List<GeoPoint> result = plane.findGeoIntersections(ray,maxDistance);
 
         if (result == null) {
             return null;

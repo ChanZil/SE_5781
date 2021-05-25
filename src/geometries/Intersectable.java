@@ -57,9 +57,19 @@ public interface Intersectable {
     }
 
     /**
-     * calculates all the intersections points of the ray given with the object
-     * @param ray check the intersections between it and the Geometry shape
-     * @return GeoPoint- a list of the geoPoints- including the intersections point and the object it intersected with.
+     * default function- if get only a ray and no max distance, put in the distance the infinity value
+     * @param ray the ray that intersect the object
+     * @return a list of the intersections geoPoints
      */
-    public List<GeoPoint> findGeoIntersections(Ray ray);
+    default List<GeoPoint> findGeoIntersections(Ray ray) {
+        return findGeoIntersections(ray,Double.POSITIVE_INFINITY);
+    }
+
+    /**
+     * find intersection geoPoints with a ray and objects, only in the distance between the light source and the objects
+     * @param ray the ray that intersect the object
+     * @param maxDistance the maximum distance to find intersection points
+     * @return a list of the intersections geoPoints
+     */
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance);
 }

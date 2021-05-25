@@ -61,19 +61,24 @@ public class Sphere extends Geometry{
     }
 
     /**
-     * find the intersections points with the ray and the sphere
+     * find the intersections points with the ray and the sphere in a certain distance
      * @param ray check the intersections between it and the Geometry shape
+     * @param maxDistance the maximum distance between the light source and the plane
      * @return a list with geoPoints- the intersections points and the object (sphere)
      */
     @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         Point3D P0 = ray.getpO();
         Vector v = ray.getDir();
         //if the ray starts in the center of the sphere, by adding the radius to the center
         //with the direction of the ray, we get the intersection with the sphere.
         if (P0.equals(center)) {
-            return List.of(new GeoPoint(this, center.add(v.scale(radius))));
+            Point3D p =  center.add(v.scale(radius));
+            if (alignZero(radius -  maxDistance) <=0 ){
+                return List.of(new GeoPoint(this,p));
+            }
         }
+
         Vector U = center.subtract(P0); //a vector from the center of the sphere to the start of the ray
         double tm = alignZero(v.dotProduct(U));
         double d = alignZero(Math.sqrt(U.lengthSquared() - tm * tm)); //the distance between the center and the ray
@@ -86,19 +91,21 @@ public class Sphere extends Geometry{
         double t2 = alignZero(tm + th);
         //if there are 2 intersections with the sphere- the ray starts outside the sphere
         //and passes through it- calculates the 2 points of the intersections with the sphere and return them.
-        if (t1 > 0 && t2 > 0) {
+        boolean t1Flag = alignZero(t1 - maxDistance)<=0;
+        boolean t2Flag = alignZero(t2 - maxDistance)<=0;
+        if (t1 > 0 && t2 > 0 && t1Flag && t2Flag) {
             Point3D P1 = ray.getPoint(t1);
             Point3D P2 = ray.getPoint(t2);
             return List.of(new GeoPoint(this, P1), new GeoPoint(this, P2));
         }
         //if the ray starts outside the sphere, passes through it and ends inside of the sphere- there
         //is one intersection.
-        if (t1 > 0) {
+        if (t1 > 0  && t1Flag) {
             Point3D P1 = ray.getPoint(t1);
             return List.of(new GeoPoint(this, P1));
         }
         //if the ray starts inside the sphere and ends outside of it- there is one intersection.
-        if (t2 > 0) {
+        if (t2 > 0 && t2Flag) {
             Point3D P2 =ray.getPoint(t2);
             return List.of(new GeoPoint(this, P2));
         }

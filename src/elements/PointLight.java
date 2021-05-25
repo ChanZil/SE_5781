@@ -23,7 +23,7 @@ public class PointLight extends Light implements LightSource{
      * @param intensity the intensity of the point light
      * @param position the position of the point light
      */
-    protected PointLight(Color intensity, Point3D position) {
+    public PointLight(Color intensity, Point3D position) {
         super(intensity);
         _position = position;
     }
@@ -99,5 +99,15 @@ public class PointLight extends Light implements LightSource{
     @Override
     public Vector getL(Point3D p) {
         return p.subtract(_position).normalize();
+    }
+
+    /**
+     * find the distance between the point light and the intersection point with the object
+     * @param p the intersection point with the object
+     * @return the distance
+     */
+    @Override
+    public double getDistance(Point3D p) {
+        return _position.distance(p);
     }
 }
