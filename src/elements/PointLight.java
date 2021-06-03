@@ -14,9 +14,9 @@ public class PointLight extends Light implements LightSource{
     private final Point3D _position; //the position of the light source
 
     //the parameters that helps to calculate the intensity of the light in every point
-    private double _Kc = 1.0;
-    private double _Kl = 0;
-    private double _Kq = 0;
+    private double _Kc = 1d;
+    private double _Kl = 0d;
+    private double _Kq = 0d;
 
     /**
      * the constructor of point light
@@ -88,7 +88,7 @@ public class PointLight extends Light implements LightSource{
     public Color getIntensity(Point3D p) {
         double d = p.distance(_position);
         double factor = 1d / (_Kc + _Kl * d + _Kq * d * d);
-        return getIntensity().scale(factor);
+        return _intensity.scale(factor);
     }
 
     /**

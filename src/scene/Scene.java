@@ -16,9 +16,17 @@ import java.util.List;
 public class Scene {
     private final String _name; //the name of the scene
     public Color background = Color.BLACK; //the color background of the scene
-    public AmbientLight ambientLight = new AmbientLight(Color.BLACK, 0); //the ambient light of the scene
+    public AmbientLight ambientLight = new AmbientLight(Color.BLACK, 1); //the ambient light of the scene
     public Geometries geometries = new Geometries(); //the geometries participate in the scene
     public List<LightSource> lights = new LinkedList<>(); //all the lights participate in the scene
+
+    /**
+     * the main constructor
+     * @param name the name of the scene
+     */
+    public Scene(String name) {
+        _name = name;
+    }
 
     /**
      * change the list of the lights participate in the scene
@@ -28,14 +36,6 @@ public class Scene {
     public Scene setLights(List<LightSource> lights) {
         this.lights = lights;
         return this;
-    }
-
-    /**
-     * the main constructor
-     * @param name the name of the scene
-     */
-    public Scene(String name) {
-        _name = name;
     }
 
     /**

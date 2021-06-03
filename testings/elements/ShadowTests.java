@@ -51,7 +51,8 @@ public class ShadowTests {
                 new Sphere(60, new Point3D(0, 0, -200)) //
                         .setEmission(new Color(java.awt.Color.BLUE)) //
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
-                new Triangle(new Point3D(-60, -30, 0), new Point3D(-30, -60, 0), new Point3D(-58, -58, -4)) //
+                new Triangle(new Point3D(-60, -30, 0), new Point3D(-30, -60, 0)
+                        , new Point3D(-58, -58, -4)) //
                         .setEmission(new Color(java.awt.Color.BLUE)) //
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)) //
         );
@@ -76,7 +77,8 @@ public class ShadowTests {
                 new Sphere(60, new Point3D(0, 0, -200)) //
                         .setEmission(new Color(java.awt.Color.BLUE)) //
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
-                new Triangle(new Point3D(-50, -20, 0), new Point3D(-20, -50, 0), new Point3D(-48, -48, -4)) //
+                new Triangle(new Point3D(-50, -20, 0), new Point3D(-20, -50, 0)
+                        , new Point3D(-48, -48, -4)) //
                         .setEmission(new Color(java.awt.Color.BLUE)) //
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)) //
         );
@@ -106,7 +108,8 @@ public class ShadowTests {
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)) //
         );
         scene.lights.add( //
-                new SpotLight(new Color(400, 240, 0), new Point3D(-88, -88, 120), new Vector(1, 1, -3)) //
+                new SpotLight(new Color(400, 240, 0), new Point3D(-88, -88, 120)
+                        , new Vector(1, 1, -3)) //
                         .setKl(1E-5).setKq(1.5E-7));
 
         Render render = new Render(). //
@@ -131,7 +134,8 @@ public class ShadowTests {
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)) //
         );
         scene.lights.add( //
-                new SpotLight(new Color(400, 240, 0), new Point3D(-75, -75, 68), new Vector(1, 1, -3)) //
+                new SpotLight(new Color(400, 240, 0), new Point3D(-75, -75, 68)
+                        , new Vector(1, 1, -3)) //
                         .setKl(1E-5).setKq(1.5E-7));
 
         Render render = new Render(). //

@@ -9,13 +9,14 @@ import static primitives.Util.isZero;
  * @author Chani & Sara Lea
  */
 public class Camera {
-    private Point3D p0;
+    private Point3D p0; //the position of the camera
+    //the vectors of the camera:
     private Vector vTo;
     private Vector vUp;
     private Vector vRight;
-    private double width;
-    private double height;
-    private double distance;
+    private double width; //the width of the view plane
+    private double height; //the height of the view plane
+    private double distance; //the distance between the camera and the view plane
 
     /**
      * camera constructor- build a camera, create the vector vRight
@@ -35,6 +36,8 @@ public class Camera {
         }
     }
 
+    //getters:
+
     public Point3D getP0() {
         return p0;
     }
@@ -51,23 +54,14 @@ public class Camera {
         return vRight;
     }
 
-    /**
-     * set the view plane size
-     * @param width the width of the view plane
-     * @param height the height of the view plane
-     * @return the current camera
-     */
+    //chaining setters:
+
     public Camera setViewPlaneSize(double width, double height){
         this.width = width;
         this.height = height;
         return this;
     }
 
-    /**
-     * set the distance of the view plane
-     * @param distance the distance of the view plane
-     * @return the current camera
-     */
     public Camera setDistance(double distance){
         this.distance = distance;
         return this;

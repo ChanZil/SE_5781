@@ -13,7 +13,7 @@ public class AmbientLight extends Light {
      * main constructor- restart the intensity to be black.
      */
     public AmbientLight() {
-        super(Color.BLACK);
+        super(Color.BLACK); //sends a basic color to the constructor
     }
 
     /**

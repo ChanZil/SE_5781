@@ -93,7 +93,7 @@ public class Render {
      *
      */
     public void writeToImage(){
-        if (imageWriter == null) //check if inageWriter has a value
+        if (imageWriter == null) //check if imageWriter has a value
             throw new MissingResourceException("No image writer", ImageWriter.class.getName(), "");
         imageWriter.writeToImage();
     }
