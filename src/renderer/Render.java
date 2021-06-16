@@ -4,6 +4,8 @@ import elements.Camera;
 import primitives.Color;
 import primitives.Ray;
 import scene.Scene;
+
+import java.util.List;
 import java.util.MissingResourceException;
 
 /**
@@ -98,5 +100,42 @@ public class Render {
         imageWriter.writeToImage();
     }
 
-
+    /**
+     * A method that will first check that a blank value was entered
+     * in all the fields and in case of lack throws a suitable deviation
+     * for each pixel a beam will be built and for each beam we
+     * will get a color from average of all the color from the rays list
+     * The women color in the appropriate pixel of the image manufacturer
+     */
+    public void renderImageSuperSampling() {
+        try {
+            if (imageWriter == null)
+                throw new MissingResourceException("No image writer", ImageWriter.class.getName(), "");
+            if (camera == null)
+                throw new MissingResourceException("No camera", Camera.class.getName(), "");
+            if (rayTracerBase == null)
+                throw new MissingResourceException("No ray trace base", RayTracerBase.class.getName(), "");
+            int nX = imageWriter.getNx();
+            int nY = imageWriter.getNy();
+            //pass every pixel of the image
+            for (int i = 0; i < nY; i++) {
+                for (int j = 0; j < nX; j++) {
+                    //get list of rays from the same one pixel
+                    List<Ray> rays = camera.constructRayThroughPixelSuperSample(nX, nY, j, i);
+                    //sending the rays to function that calculate the average of all the color of the rays
+                    Color k = averageOfColor(rays);
+                    imageWriter.writePixel(j, i, k);
+                }
+            }
+        } catch (MissingResourceException e) {
+            throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
+        }
+    }
+    public Color averageOfColor(List<Ray> rays) {
+        Color color = Color.BLACK;
+        for (Ray n : rays){
+            color = color.add(rayTracerBase.traceRay(n));
+        }
+        return color.scale(1.d/rays.size());
+    }
 }

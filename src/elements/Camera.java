@@ -1,7 +1,11 @@
 package elements;
 import primitives.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static primitives.Util.isZero;
+import static primitives.Util.random;
 
 /**
  * Camera class represent the camera of the scene
@@ -14,6 +18,8 @@ public class Camera {
     private Vector vTo;
     private Vector vUp;
     private Vector vRight;
+    public int beamOfRay ; //number of rays
+    public Point3D _pTo;
     private double width; //the width of the view plane
     private double height; //the height of the view plane
     private double distance; //the distance between the camera and the view plane
@@ -91,6 +97,37 @@ public class Camera {
         //if the pixel is not the center of the rows and the center of the columns
         if(!isZero(dJ) && isZero(dI))
             pTo = pTo.add(vRight.scale(dJ));
+        _pTo=pTo;
         return new Ray(p0, pTo.subtract(p0));
+    }
+
+    public Camera setBeamOfRay(int beamOfRay) {
+        this.beamOfRay = beamOfRay;
+        return this;
+    }
+
+    public List<Ray> constructRayThroughPixelSuperSample(int nX, int nY, int j, int i) {
+
+        List<Ray> rays = new LinkedList<>();
+
+        rays.add(constructRayThroughPixel( nX,  nY,  j,  i));//the point that the vector vTo gets to
+
+        Point3D pc = _pTo;
+
+        //Two random variables from which we get a dot within the pixel range
+        double randomNumber1,randomNumber2;
+
+        //We get 2 numbers and create a new dot from
+        // it that comes out inside the pixel and is
+        // different from the center of the pixel and
+        // create a new beam for that dot
+
+        for (int k = 0; k < beamOfRay; k++) {
+            randomNumber1 = random(-1*width / nX/2,width / nX/2);
+            randomNumber2= random(-1*height / nY/2,height / nY/2);
+            Point3D P = new Point3D(pc.getX()+randomNumber1,pc.getY()+randomNumber2,pc.getZ());
+            rays.add(new Ray(p0, P.subtract(p0)));
+        }
+        return rays;
     }
 }
