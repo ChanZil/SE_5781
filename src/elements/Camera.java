@@ -101,6 +101,8 @@ public class Camera {
         return new Ray(p0, pTo.subtract(p0));
     }
 
+    //Mini project 1:
+
     public Camera setBeamOfRay(int beamOfRay) {
         this.beamOfRay = beamOfRay;
         return this;
@@ -130,4 +132,7 @@ public class Camera {
         }
         return rays;
     }
+
+    //Mini PROJECT 2:
+
 }
