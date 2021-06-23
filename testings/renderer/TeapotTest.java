@@ -17,13 +17,13 @@ import scene.Scene;
  */
 public class TeapotTest {
     private final Camera camera = new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, 1, 0)) //
-            .setDistance(1000).setViewPlaneSize(200, 200);
+            .setDistance(1000).setViewPlaneSize(200, 200).setBeamOfRay(4);
     private final Scene scene = new Scene("Test scene");
 
     private static final Color color = new Color(200, 0, 0);
     private static final Material mat = new Material().setKd(0.5).setKs(0.5).setShininess(60);
 
-    private static final Point3D[] pnts = new Point3D[] { null, //
+    private static Point3D[] pnts = new Point3D[] { null, //
             new Point3D(40.6266, 28.3457, -1.10804), //
             new Point3D(40.0714, 30.4443, -1.10804), //
             new Point3D(40.7155, 31.1438, -1.10804), //
@@ -1564,7 +1564,7 @@ public class TeapotTest {
                 .setImageWriter(imageWriter) //
                 .setRayTracer(new BasicRayTracer(scene))//
                 .setMultithreading(3).setDebugPrint();
-        render.renderImage();
+        render.renderImageSuperSampling();
         render.printGrid(50, new Color(java.awt.Color.YELLOW));
         render.writeToImage();
     }

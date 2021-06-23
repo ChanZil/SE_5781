@@ -11,19 +11,10 @@ public class Material {
     public double Ks = 0;
     //the shininess parameter:
     public int nShininess = 0;
-
     public double kt = 0d;  // opaque [0.0 - 1.0]
     public double kr = 0d;  // matt surface [0.0 - 1.0]
 
-    public double getKt() {
-        return kt;
-    }
-
-    public double getKr() {
-        return kr;
-    }
-
-    ///chaining setter methods
+    //chaining setter methods
     public Material setKt(double kt) {
         this.kt = kt;
         return this;
@@ -32,6 +23,21 @@ public class Material {
     public Material setKr(double kr) {
         this.kr = kr;
         return this;
+    }
+
+    public Material setShininess(int nShininess) {
+        this.nShininess = nShininess;
+        return this;
+    }
+
+    //getters:
+
+    public double getKt() {
+        return kt;
+    }
+
+    public double getKr() {
+        return kr;
     }
 
     /**
@@ -77,14 +83,5 @@ public class Material {
         return nShininess;
     }
 
-    /**
-     * change the value of nShininess
-     *
-     * @param nShininess the new parameter
-     * @return the material
-     */
-    public Material setShininess(int nShininess) {
-        this.nShininess = nShininess;
-        return this;
-    }
+
 }

@@ -171,7 +171,7 @@ public class Render {
             if (Render.this.print)
                 while (this.percents < 100)
                     try {
-                        synchronized (this) {
+                        synchronized(this) {
                             wait();
                         }
                         System.out.printf("\r %02d%%", this.percents);
@@ -220,7 +220,6 @@ public class Render {
     public void writeToImage() {
         if (imageWriter == null)
             throw new MissingResourceException(RESOURCE_ERROR, RENDER_CLASS, IMAGE_WRITER_COMPONENT);
-
         imageWriter.writeToImage();
     }
 
@@ -313,8 +312,9 @@ public class Render {
                 if (j % step == 0 || i % step == 0)
                     imageWriter.writePixel(j, i, color);
     }
-    //Mini project 1:
 
+
+    //Mini project 1:
 
     /**
      *  A method that will first check that a blank value was entered
@@ -349,9 +349,9 @@ public class Render {
     }
 
     /**
-     *
-     * @param rays
-     * @return
+     * calculate the average of the color of all the rays given
+     * @param rays a list of all the intersected rays
+     * @return the average color
      */
     public Color averageOfColor(List<Ray> rays) {
         Color color = Color.BLACK;
@@ -361,8 +361,6 @@ public class Render {
         return color.scale(1.d/rays.size());
     }
 }
-
-//Mimi project 2:
 
 
 /*
